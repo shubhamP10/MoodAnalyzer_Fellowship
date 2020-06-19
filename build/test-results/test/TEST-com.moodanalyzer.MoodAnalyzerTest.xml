@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.moodanalyzer.MoodAnalyzerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-19T15:24:30" hostname="GOOGLY" time="0.003">
+  <properties/>
+  <testcase name="givenNullMood_ShouldReturn_Happy" classname="com.moodanalyzer.MoodAnalyzerTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
