@@ -47,7 +47,7 @@ public class MoodAnalyzerTest {
         try {
             moodAnalyzer.analyseMood(null);
         } catch (MoodAnalysisException e) {
-            Assert.assertEquals("Please enter Proper Mood",e.getMessage());
+            Assert.assertEquals(MoodAnalysisException.exceptionType.ENTERED_NULL,e.type);
         }
     }
 }
