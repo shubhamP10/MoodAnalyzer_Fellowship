@@ -9,7 +9,6 @@ public class MoodAnalyzer {
         this.message = message;
         return analyseMood();
     }
-
     public String analyseMood() throws MoodAnalysisException {
         try {
             if (message.length() == 0)
