@@ -1,5 +1,6 @@
-package com.moodanalyzer;
+package com.bridgelabz.moodanalyzer;
 
+import com.bridgelabz.moodanalyzer.exception.MoodAnalysisException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -15,10 +16,11 @@ public class MoodAnalyzerTest {
         String mood;
         try {
             mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("SAD",mood);
+            Assert.assertEquals("SAD", mood);
         } catch (MoodAnalysisException e) {
         }
     }
+
     /*
      *This Test Case Excepts
      * Happy Mood
@@ -29,11 +31,12 @@ public class MoodAnalyzerTest {
         String mood;
         try {
             mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("HAPPY",mood);
+            Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
         }
 
     }
+
     /*
      *This Test Case Will Check For
      * Null Pointer Exception
@@ -46,11 +49,12 @@ public class MoodAnalyzerTest {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(MoodAnalysisException.class);
             mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("HAPPY",mood);
+            Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
         }
     }
+
     /*
      *This Test Case Will Check For
      * Null Pointer Exception
@@ -62,7 +66,7 @@ public class MoodAnalyzerTest {
         try {
             moodAnalyzer.analyseMood(null);
         } catch (MoodAnalysisException e) {
-            Assert.assertEquals(MoodAnalysisException.exceptionType.ENTERED_NULL,e.type);
+            Assert.assertEquals(MoodAnalysisException.exceptionType.ENTERED_NULL, e.type);
         }
     }
 }
