@@ -3,12 +3,14 @@ package com.bridgelabz.moodanalyzertest;
 import com.bridgelabz.moodanalyzer.MoodAnalyzer;
 import com.bridgelabz.moodanalyzer.MoodAnalyzerFactory;
 import com.bridgelabz.moodanalyzer.exception.MoodAnalysisException;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class MoodAnalyzerTest {
     /*
@@ -19,7 +21,7 @@ public class MoodAnalyzerTest {
     public void givenMessgae_WhenSad_ShouldReturn_Sad() throws MoodAnalysisException {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in Sad Mood");
         String mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("SAD", mood);
+        assertEquals("SAD", mood);
     }
 
     /*
@@ -30,7 +32,7 @@ public class MoodAnalyzerTest {
     public void givenMessage_WhenNotSad_ShouldReturn_Happy() throws MoodAnalysisException {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in any Mood");
         String mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("HAPPY", mood);
+        assertEquals("HAPPY", mood);
     }
 
     /*
@@ -45,7 +47,7 @@ public class MoodAnalyzerTest {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(MoodAnalysisException.class);
             mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("HAPPY", mood);
+            assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
         }
@@ -62,7 +64,7 @@ public class MoodAnalyzerTest {
         try {
             moodAnalyzer.analyseMood(null);
         } catch (MoodAnalysisException e) {
-            Assert.assertEquals(MoodAnalysisException.exceptionType.ENTERED_NULL, e.type);
+            assertEquals(MoodAnalysisException.exceptionType.ENTERED_NULL, e.type);
         }
     }
 
@@ -75,7 +77,7 @@ public class MoodAnalyzerTest {
             MoodAnalyzer moodAnalyzer = (MoodAnalyzer) obj;
             try {
                 String mood = moodAnalyzer.analyseMood();
-                Assert.assertEquals("HAPPY", mood);
+                assertEquals("HAPPY", mood);
             } catch (MoodAnalysisException e) {
                 e.printStackTrace();
             }
@@ -87,12 +89,7 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyserClass_WhenProper_ShouldReturn_Object() {
         MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer("I'm in a Happy mood");
-        try {
-            String mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("HAPPY",mood);
-        } catch (MoodAnalysisException e) {
-            e.printStackTrace();
-        }
+        assertSame(new MoodAnalyzer("I'm in a Happy mood"), moodAnalyzer);
 
     }
 }
