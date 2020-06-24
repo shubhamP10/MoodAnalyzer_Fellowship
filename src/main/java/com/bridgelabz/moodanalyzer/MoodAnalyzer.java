@@ -26,4 +26,11 @@ public class MoodAnalyzer {
             throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ENTERED_NULL, "Please enter Proper Mood");
         }
     }
+
+    public boolean equals(MoodAnalyzer another) {
+        if (this.message.equals(another))
+            return true;
+        else
+            return false;
+    }
 }
