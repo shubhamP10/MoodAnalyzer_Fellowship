@@ -23,7 +23,7 @@ public class MoodAnalyzer {
             else
                 return "HAPPY";
         } catch (NullPointerException e) {
-            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ENTERED_NULL, "Please enter Proper Mood");
+            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ENTERED_NULL, e);
         }
     }
 
