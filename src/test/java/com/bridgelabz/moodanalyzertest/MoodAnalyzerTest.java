@@ -50,7 +50,7 @@ public class MoodAnalyzerTest {
             mood = moodAnalyzer.analyseMood();
             Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
-            e.printStackTrace();
+            assertEquals(exceptionType.ENTERED_NULL, e.type);
         }
     }
 
@@ -106,7 +106,7 @@ public class MoodAnalyzerTest {
             String mood = moodAnalyzer.analyseMood();
             assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
-            assertEquals(exceptionType.NO_SUCH_CLASS,e.type);
+            assertEquals(exceptionType.NO_SUCH_CLASS, e.type);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -120,6 +120,8 @@ public class MoodAnalyzerTest {
             assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             assertEquals(exceptionType.NO_SUCH_METHOD, e.type);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
     }
 
@@ -131,46 +133,56 @@ public class MoodAnalyzerTest {
             assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
     }
 
     @Test
     public void givenMoodAnalyserClass_WhenProper_ShouldReturn_Object() throws MoodAnalysisException {
-        MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I'm in a Happy mood");
         try {
+            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I'm in a Happy mood");
             String mood = moodAnalyzer.analyseMood();
             Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
     }
+
     @Test
-    public void givenMoodAnalyser_WhenNotProper_ShouldReturn_False() throws MoodAnalysisException {
+    public void givenMoodAnalyser_WhenNotProper_ShouldReturn_False() throws MoodAnalysisException, InstantiationException {
         MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I'm in a Happy mood");
-            boolean equals = moodAnalyzer.equals(moodAnalyzer);
-            assertEquals(false,equals);
+        boolean equals = moodAnalyzer.equals(moodAnalyzer);
+        assertEquals(false, equals);
     }
 
     @Test
     public void givenMoodAnalyser_OnChangeMood_ShouldReturnHappy() {
         try {
             Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
-            MoodAnalyzerReflector.setFieldValue(myObject,"message","I'm in Happy Mood");
+            MoodAnalyzerReflector.setFieldValue(myObject, "message", "I'm in Happy Mood");
             Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyseMood");
             assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
     }
+
     @Test
     public void givenMoodAnalyser_OnChangeMood_WhenFieldNotProper_ShouldThrowException() {
         try {
             Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
-            MoodAnalyzerReflector.setFieldValue(myObject,"dummy","I'm in Happy Mood");
+            MoodAnalyzerReflector.setFieldValue(myObject, "dummy", "I'm in Happy Mood");
             Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyseMood");
             assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
-            assertEquals(exceptionType.NO_SUCH_FIELD,e.type);
+            assertEquals(exceptionType.NO_SUCH_FIELD, e.type);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
     }
 
@@ -178,12 +190,13 @@ public class MoodAnalyzerTest {
     public void givenMoodAnalyser_OnChangeMood_WhenNullMessage_ShouldThrowException() {
         try {
             Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
-            MoodAnalyzerReflector.setFieldValue(myObject,"message"," ");
+            MoodAnalyzerReflector.setFieldValue(myObject, "message", " ");
             Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyseMood");
             assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
+            assertEquals(exceptionType.ENTERED_NULL, e.type);
+        } catch (InstantiationException e) {
             e.printStackTrace();
-            assertEquals(exceptionType.ENTERED_NULL,e.type);
         }
     }
 }

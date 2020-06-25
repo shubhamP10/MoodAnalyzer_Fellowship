@@ -17,10 +17,10 @@ public class MoodAnalyzerReflector {
             throw new MoodAnalysisException(MoodAnalysisException.exceptionType.NO_SUCH_CLASS, "No Such Class");
         } catch (InvocationTargetException e) {
             throw new MoodAnalysisException(MoodAnalysisException.exceptionType.METHOD_INVOCATION_ISSUE, "May Be Issues with Data Entered", e);
-        } catch (NoSuchMethodException  e) {
-            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.NO_SUCH_METHOD,e);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.NO_SUCH_METHOD, e);
         } catch (IllegalAccessException e) {
-            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ILLIGAL_ACCESS,e);
+            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ILLIGAL_ACCESS, e);
         }
     }
 
@@ -32,7 +32,7 @@ public class MoodAnalyzerReflector {
         } catch (InvocationTargetException e) {
             throw new MoodAnalysisException(MoodAnalysisException.exceptionType.METHOD_INVOCATION_ISSUE, "May Be Issues with Data Entered", e);
         } catch (IllegalAccessException e) {
-            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ILLIGAL_ACCESS,e);
+            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ILLIGAL_ACCESS, e);
         }
     }
 
