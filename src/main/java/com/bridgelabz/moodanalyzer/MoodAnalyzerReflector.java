@@ -3,6 +3,7 @@ package com.bridgelabz.moodanalyzer;
 import com.bridgelabz.moodanalyzer.exception.MoodAnalysisException;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyzerReflector {
@@ -27,6 +28,18 @@ public class MoodAnalyzerReflector {
             throw new MoodAnalysisException(MoodAnalysisException.exceptionType.NO_SUCH_METHOD, "Define Proper Method");
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new MoodAnalysisException(MoodAnalysisException.exceptionType.METHOD_INVOCATION_ISSUE, "May Be Issues with Data Entered", e);
+        }
+    }
+
+    public static void setFieldValue(Object myObject, String fieldName, String fieldValue) throws MoodAnalysisException {
+        try {
+            Field field = myObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(myObject, fieldValue);
+        } catch (NoSuchFieldException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.NO_SUCH_FIELD, "Define Proper Field");
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.FIELD_SETTING_ISSUE, "May Be Issues with Data Entered", e);
         }
     }
 }
