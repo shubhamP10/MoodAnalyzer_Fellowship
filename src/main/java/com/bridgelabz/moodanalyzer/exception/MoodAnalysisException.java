@@ -17,8 +17,8 @@ public class MoodAnalysisException extends Exception {
     }
 
     public MoodAnalysisException(exceptionType type, String messgae, Throwable cause) {
-        super(messgae, cause);
-        this.type = type;
+        super(messgae);
+        new MoodAnalysisException(type,cause);
     }
 
     public enum exceptionType {
