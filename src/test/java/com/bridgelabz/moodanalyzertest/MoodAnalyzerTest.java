@@ -90,13 +90,13 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyserClassWhenNotProper_ShouldThrow_Exception() throws NoSuchMethodException, ClassNotFoundException {
         try {
-            Constructor<?> constructor = Class.forName("com.bridgelabz.moodanalyzer.MoodAnalyzer1").getConstructor(String.class);
-            Object obj = constructor.newInstance("I'm in a Happy Mood");
+            Constructor<?> constructor = Class.forName("com.bridgelabz.moodanalyzer.MoodAnalyzer").getConstructor(String.class);
+            Object obj = constructor.newInstance("I'm in a Any Mood");
             MoodAnalyzer moodAnalyzer = (MoodAnalyzer) obj;
             String mood = moodAnalyzer.analyseMood();
             assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
-
+            assertEquals(exceptionType.NO_SUCH_CLASS,e.type);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
