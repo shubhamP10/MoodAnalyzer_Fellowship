@@ -11,7 +11,17 @@ public class MoodAnalysisException extends Exception {
         this.type = type;
     }
 
+    public MoodAnalysisException(exceptionType type, Throwable cause) {
+        super(cause);
+        this.type = type;
+    }
+
+    public MoodAnalysisException(exceptionType type, String messgae, Throwable cause) {
+        super(messgae, cause);
+        this.type = type;
+    }
+
     public enum exceptionType {
-        ENTERED_EMPTY, ENTERED_NULL
+        ENTERED_EMPTY, ENTERED_NULL, NO_SUCH_CLASS, NO_SUCH_METHOD, METHOD_INVOCATION_ISSUE
     }
 }
