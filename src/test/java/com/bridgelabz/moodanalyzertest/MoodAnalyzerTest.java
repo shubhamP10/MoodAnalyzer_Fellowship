@@ -163,7 +163,7 @@ public class MoodAnalyzerTest {
         }
     }
     @Test
-    public void givenMoodAnalyser_OnChangeMood_WhenFieldNotProper_ShouldReturnException() {
+    public void givenMoodAnalyser_OnChangeMood_WhenFieldNotProper_ShouldThrowException() {
         try {
             Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
             MoodAnalyzerReflector.setFieldValue(myObject,"dummy","I'm in Happy Mood");
@@ -171,6 +171,19 @@ public class MoodAnalyzerTest {
             assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             assertEquals(exceptionType.NO_SUCH_FIELD,e.type);
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyser_OnChangeMood_WhenNullMessage_ShouldThrowException() {
+        try {
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
+            MoodAnalyzerReflector.setFieldValue(myObject,"message"," ");
+            Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyseMood");
+            assertEquals("HAPPY", mood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+            assertEquals(exceptionType.ENTERED_NULL,e.type);
         }
     }
 }
