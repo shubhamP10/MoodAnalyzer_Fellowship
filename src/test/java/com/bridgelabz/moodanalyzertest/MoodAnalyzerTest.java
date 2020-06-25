@@ -134,4 +134,10 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void givenMoodAnalyser_WhenNotProper_ShouldReturn_False() throws MoodAnalysisException {
+        MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I'm in a Happy mood");
+            boolean equals = moodAnalyzer.equals(moodAnalyzer);
+            assertEquals(false,equals);
+    }
 }
