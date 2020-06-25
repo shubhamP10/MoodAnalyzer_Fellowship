@@ -27,10 +27,9 @@ public class MoodAnalyzer {
         }
     }
 
-    public boolean equals(MoodAnalyzer another) {
-        if (this.message.equals(another))
-            return true;
-        else
-            return false;
+    @Override
+    public boolean equals(Object another) {
+        MoodAnalyzer mood = (MoodAnalyzer) another;
+        return this.message.equals(mood);
     }
 }
