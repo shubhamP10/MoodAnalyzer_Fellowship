@@ -69,6 +69,16 @@ public class MoodAnalyzerTest {
         }
     }
 
+    @Test
+    public void givenEmptyMood_ShouldThrow_Exception() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer(" ");
+        try {
+            moodAnalyzer.analyseMood(" ");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(exceptionType.ENTERED_EMPTY, e.type);
+        }
+    }
+
     /*Using Reflection*/
     @Test
     public void givenMoodAnalyserWhenProper_ShouldReturn_Object() throws ClassNotFoundException, NoSuchMethodException {
@@ -139,5 +149,9 @@ public class MoodAnalyzerTest {
         MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I'm in a Happy mood");
             boolean equals = moodAnalyzer.equals(moodAnalyzer);
             assertEquals(false,equals);
+    }
+
+    @Test
+    public void givenMoodAnalyser_OnChangeMood_ShouldReturnHappy() {
     }
 }
