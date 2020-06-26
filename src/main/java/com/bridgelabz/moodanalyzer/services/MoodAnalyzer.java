@@ -30,6 +30,6 @@ public class MoodAnalyzer {
     @Override
     public boolean equals(Object another) {
         MoodAnalyzer mood = (MoodAnalyzer) another;
-        return this.message.equals(mood);
+        return this.message.equals(mood.message);
     }
 }
